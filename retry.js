@@ -1,11 +1,15 @@
 async function retry(fn, retries) {
-    for (let i = 0; i <= retries; i++) {
-        try {
-            return await fn();
-        } catch (err) {
-            if (i === retries) {
-                throw err;
-            }
-        }
+  for (let i = 0; i <= retries; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (i === retries) {
+        throw err;
+      }
+
+      await new Promise(resolve => {
+        setTimeout(resolve, 1000);
+      });
     }
+  }
 }
