@@ -1,21 +1,12 @@
 function deepClone(value) {
     if (value === null || typeof value !== 'object') return value;
 
-    if (Array.isArray(value)) {
-        const result = [];
+    
+    const clone = Array.isArray(obj) ? [] : {};
 
-        for (const item of value) {
-            result.push(deepClone(item));
-        }
-
-        return result;
+    for (const key in obj) {
+      clone[key] = deepClone(obj[key]);
     }
 
-    const result = {};
-
-    for (const key in value) {
-        result[key] = deepClone(value[key]);
-    }
-
-    return result;
+    return clone;
 }
